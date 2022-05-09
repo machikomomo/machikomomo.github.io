@@ -1,7 +1,7 @@
 baseURL = "http://crepuscular.halfbit.top/"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"                             # en / zh-cn / ... (This field determines which i18n file to use)
-title = "Half Bit"
+title = "Moka"
 preserveTaxonomyNames = true
 enableRobotsTXT = true
 enableEmoji = true
@@ -38,11 +38,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   weight = 20
   identifier = "archives"
   url = "/post/"
-[[menu.main]]
-  name = "Tags"
-  weight = 30
-  identifier = "tags"
-  url = "/tags/"
+
 [[menu.main]]
   name = "Categories"
   weight = 40
