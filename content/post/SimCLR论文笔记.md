@@ -43,6 +43,8 @@ https://zhuanlan.zhihu.com/p/197802321
 
 要注意的是尽管图中加了一层g层（比如mlp），但是这么做的原因仅仅是辅助，拿计算得到的z来进行loss计算。这样做的效果比直接使用h去进行loss计算结果要好。最终目的是得到好的representation用于下游任务。
 
+
+
 ![截屏2022-05-09 下午8.35.36](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-09 下午8.35.36.png)
 
 ## contrastive loss
@@ -54,6 +56,8 @@ https://zhuanlan.zhihu.com/p/197802321
 对照下图中的definel(i,j)，分母应该是用来做归一化，同时loss会朝着分子越小，分母越大的趋势优化。
 
 即同一个数据增强以后的图片越相似（类内距离减小）；不同图片增强以后不相似（类间距离增大）。
+
+
 
 ![截屏2022-05-09 下午8.53.00](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-09 下午8.53.00.png)
 
@@ -81,6 +85,8 @@ x3经过数据增强，记为x5，x6.
 
 补充一下。作者的contrastive loss是基于NT-Xent得到的一个总的优化目标。NT-Xent非原创。
 
+
+
 ![截屏2022-05-09 下午9.15.40](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-09 下午9.16.03.png)
 
 ## 如何评价representation的好坏
@@ -92,6 +98,8 @@ x3经过数据增强，记为x5，x6.
 (1) Data augmentation is crucial to UCL；
 
 单纯的图片裁剪没什么效果。加上了color distortion才有显著效果。左边8张图，只有裁剪。看直方图就能分辨是否是一张图片裁剪出来的。右边8张图，加上color distortion。
+
+
 
 ![img](https://miro.medium.com/max/1400/1*rujTYcDmDRxxpeTT_CmZAw.png)
 
