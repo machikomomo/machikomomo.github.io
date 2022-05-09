@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://crepuscular.halfbit.top/sitemap.xml
