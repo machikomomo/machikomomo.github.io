@@ -1,7 +1,7 @@
 baseURL = "http://crepuscular.halfbit.top/"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"                             # en / zh-cn / ... (This field determines which i18n file to use)
-title = "Moka"
+title = "ODYSSEY"
 preserveTaxonomyNames = true
 enableRobotsTXT = true
 enableEmoji = true
