@@ -43,9 +43,7 @@ https://zhuanlan.zhihu.com/p/197802321
 
 要注意的是尽管图中加了一层g层（mlp），但是这么做的原因仅仅是辅助，拿计算得到的z来进行loss计算。这样做的效果比直接使用h去进行loss计算结果要好。最终目的是得到好的representation用于下游任务。
 
-
-
-![截屏2022-05-09 下午8.35.36](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-09 下午8.35.36.png)
+![截屏2022-05-10 上午10.39.04](/Users/momochan/截屏/截屏2022-05-10 上午10.39.04.png)
 
 ## contrastive loss
 
@@ -56,8 +54,6 @@ https://zhuanlan.zhihu.com/p/197802321
 对照下图中的define l(i,j)，分母应该是用来做归一化，同时loss会朝着分子越小，分母越大的趋势优化。
 
 即同一个数据增强以后的图片越相似（类内距离减小）；不同图片增强以后不相似（类间距离增大）。
-
-
 
 ![截屏2022-05-09 下午8.53.00](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-09 下午8.53.00.png)
 
@@ -85,6 +81,8 @@ x3经过数据增强，记为x5，x6.
 
 补充一下。作者的contrastive loss是基于NT-Xent得到的一个总的优化目标。NT-Xent非原创。总结：一个batch N 个samples，因为有两条分支所以增强后就能得到2N个samples。i，j 是positive pair（正样本对），剩下的2N-2是negative pair（负样本对）。
 
+![截屏2022-05-09 下午9.16.03](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-09 下午9.16.03.png)
+
 loss 中含有一个温度参数![[公式]](https://www.zhihu.com/equation?tex=%5Ctau)，可以用来控制loss对负样本对的敏感程度。
 
 ![img](https://pic2.zhimg.com/80/v2-5696af8c45b95d1c5e8fb9614917a79d_1440w.jpg)
@@ -98,10 +96,6 @@ loss 中含有一个温度参数![[公式]](https://www.zhihu.com/equation?tex=%
 3、相似性较大的负样本，也就是 hard case。比如原图为一直狗A，那么另外一只狗B的图像或者一只狼的图像C相对A来说就是hard case；而一个人D或者建筑E的图像相对于A来说就是easy case。
 
 4、![[公式]](https://www.zhihu.com/equation?tex=%5Ctau)需要根据不同的任务背景去做取舍超参，SimCLR原作实验结果 ![[公式]](https://www.zhihu.com/equation?tex=%5Ctau)为0.25时取得最优结果。
-
-- 
-
-![截屏2022-05-09 下午9.15.40](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-09 下午9.16.03.png)
 
 ## 如何评价representation的好坏
 
