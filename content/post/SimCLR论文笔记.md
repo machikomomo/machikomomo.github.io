@@ -43,7 +43,7 @@ https://zhuanlan.zhihu.com/p/197802321
 
 要注意的是尽管图中加了一层g层（mlp），但是这么做的原因仅仅是辅助，拿计算得到的z来进行loss计算。这样做的效果比直接使用h去进行loss计算结果要好。最终目的是得到好的representation用于下游任务。
 
-![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/截屏2022-05-10 上午10.39.04.png)
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/framework1.png)
 
 ## contrastive loss
 
