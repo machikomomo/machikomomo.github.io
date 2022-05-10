@@ -1,6 +1,6 @@
 ---
 author: "momo"
-date: 2022-05-09
+date: 2022-05-07
 title: "SimCLR论文笔记"
 categories: [
     "论文笔记",
