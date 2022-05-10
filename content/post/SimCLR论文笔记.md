@@ -121,3 +121,9 @@ batch_size越大越好。好贵。
 
 ![img](https://miro.medium.com/max/1400/1*yrzj_3xxzWNBWBp8JjgNJw.png)
 
+## 代码（pytorch）
+
+https://github.com/sthalles/SimCLR
+
+https://github.com/Spijkervet/SimCLR
+
