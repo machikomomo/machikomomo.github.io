@@ -1,20 +1,20 @@
 ---
 author: "momo"
 date: 2022-05-11
-title: "自监督med论文笔记"
+title: "CL_PLP论文笔记"
 categories: [
     "论文笔记",
     "医学图像分析",
 ]
 ---
 
-# Momentum contrastive learning for few-shot COVID-19 diagnosis from chest CT images
+# Deep semi-supervised learning with contrastive learning and partial label propagation for image data
 
-https://www.sciencedirect.com/science/article/pii/S0031320321000133?via%3Dihub
+https://www.sciencedirect.com/science/article/pii/S0950705122002702
 
-2021 pattern recognition
+在本文中，我们提出了一种新的基于对比性自监督学习和部分标签传播策略的深度半监督学习算法，称为CL_PLP。该方法由两个模块组成，包括自监督特征提取模块和部分标签传播模块，可以分别改进传统标签传播方法的两个阶段。当标签不足时，经过训练的网络很难学到准确的特征表示，这就进一步降低了标签传播阶段产生的伪标签的准确性。为了解决这个问题，我们提出了一个新的网络结构，增加了投影层和一个额外的对比性损失项，用于对比性学习。同时，我们通过结合强增强和弱增强[6]来扩展数据集，以增加数据集的多样性和模型的稳健性。在第二阶段，我们通过根据伪标签的质量中断标签传播程序来提高高置信度的伪标签的影响。最后，我们提出了一个策略，将我们的部分标签传播模块与最先进的归纳式半监督学习算法相结合。
 
-作者开发了一个端到端的可训练的深度few-shot学习框架，可以在胸部CT图像上以最少的训练提供准确的预测。具体来说，首先使用实例判别任务来强制模型判别两幅图像是否为同一实例。然后生成相同图像的不同视图以增加原始数据集。由于在这一阶段的目标是增加除辨别力之外的变异，能够有效地避免前面提到的数据增强的缺点（过拟合、对参数高度敏感）。然后，部署一个自监督的策略[22]，用动力对比训练来进一步提高性能。建立一个动态字典来进行（key,query）查询，其中的key是从数据中采样并由编码器编码的。然而，由于反向传播的原因，字典中的键是有噪声的，而且不一致[23]。采用动量机制，通过在不同尺度上更新key和query encoders来缓解这种影响。最后，我们利用两个公共的肺部数据集来预训练一个嵌入网络，并采用prototypical network[24]来进行few-shot分类，通过测量与每个类别的衍生原型表示的距离来学习分类的度量空间。在两个新的数据集上进行的广泛实验表明，我们的模型为用非常有限的可用训练数据进行COVID-19的快速诊断提供了一个有希望的工具。
+我们的算法在三个标准基线数据集CIFAR-10、CIFAR-100和miniImageNet上的表现优于之前最先进的传导式深度半监督学习方法。通过将我们的模型转移到医学COVID19-Xray数据集，它也取得了良好的性能。最后，我们提出了一种策略，将我们的部分标签传播模块与归纳式半监督学习方法结合起来。
 
 ## experiment
 
@@ -47,7 +47,6 @@ The two- layer MLP projection head included a 2048-D hidden layer with a ReLU ac
 The weights were initialized by using He initialization [41], and the temperature parameter τ was set to 0.07. 
 
 The experiments were conducted on eight GPUS which includes six NVIDIA TITAN X Pascal GPUs and two NVIDIA TITAN RTX.
-
 
 
 
