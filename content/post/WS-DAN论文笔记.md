@@ -1,0 +1,295 @@
+---
+author: "momo"
+date: 2022-05-21
+title: "WS-DAN论文笔记"
+categories: [
+    "论文笔记",
+    "医学图像分析",
+]
+
+---
+
+## 我的启发
+
+之前看过这篇文章。跑了代码以后，再重新看一遍并且详细记录一下自己的理解。
+
+## 引用
+
+See Better Before Looking Closer: Weakly Supervised Data Augmentation Network for Fine-Grained Visual Classification,
+
+https://arxiv.org/pdf/1901.09891.pdf.
+
+
+## 相关博客
+
+https://blog.csdn.net/weixin_41735859/article/details/108417343
+
+## 摘要
+
+数据增强可以增加训练数据、防止过拟合、提高模型泛化性。但是实际应用的时候，一些**随机的数据增强**比如**随机裁剪**，可能会引入背景噪声。所以作者提出一个弱监督的数据增强网络——Weakly Supervised Data Augmentation Network (WS-DAN)来探索数据增强的潜力。对于每一张训练图片，都会产生attention maps，每一张map表示目标物体的有代表性的区域，在实现的时候，作者设定parts的数量为32，也就是找32个有代表性的区域。然后根据attention maps去做数据增强，包括crop和drop。
+
+## 简介
+
+作者通过 bilinear attention pooling 和 attention regularization loss 来弱监督 attention maps 的生成。 
+
+作者表示自己提出的模型和其他人提出的“part定位（part可以理解为object的一个有代表性的区域）”模型，有一个很大的优点就是定位的part可以非常多——our model can be more easily to locate a large number of object’s parts (more than 10) so as to achieve better performance.关于这一点的重要性，作者补充，如果对于一个object只关注几个part，那么当这几个part被遮挡（角度/姿势的原因）时，就会导致预测错误，所以关注的part越多越好。这一点可以通过**attention drop**来实现。把最有注意力的那部分擦去，引导网络再探索剩余部分的有注意力的part。
+
+**attention crop**就是去crop和resize有代表性的区域。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-05-2111.18.20.png)
+
+虚线上半部分是训练时候做的。对每一张训练图片生成attention maps，然后从中随机选择一张attention map，去和原图进行计算，做crop和drop。两条分支，分别得到一张新的图片。
+
+虚线下半部分是预测时候做的，对一张原始图片先进行计算得到attention maps和一个原始预测结果。然后利用attention maps对原图做计算，crop和放大，得到一张新图，用这张新图再计算得到一个结果。
+
+## 相关工作
+
+作者从FGVC、数据增强、定位的弱监督学习三方面讲。
+
+**一、针对FGVC，作者总结了别人三个方向的工作。并且针对这三个方向分别提出自己的创新。**
+
+1.细粒度分类领域，当时更关注“仅仅依靠图片级别的标注而不依赖额外标注的方式”——To reduce aditional location labeling cost, methods that only require image-level annotation draw more attention.**对应作者用attention maps去定位part**
+
+2.因为深度学习已经把特征提取这件事情做得很好了，所以Different feature pooling methods have been proposed.（关于pooling的方法）In this paper, we propose **bilinear attention pooling** which combines attention layers with featur layers, whose number of attention regions is more easily to be increased and improve the classification accuracy as shown in Table 9.**作者用bilinear attention pooling**去做特征融合。
+
+3.度量学习。**作者提出attention regularization loss**。用这个来 regular the attention regions and corresponding local features, which improves the identities of object’s parts and the classification accuracy.
+
+**二、针对数据增强，作者首先表示自己只关注图像的空间层面的增强。**
+
+1.别人的工作，如Max-Drop可以去除最大化激活的特征，来鼓励网络关注不太突出的特征。缺点是Max-drop只能去除每个图像的一个有代表性的区域。**所以作者的drop可以去除多个区域**。还有Cutout和Hide-and-Seek通过随机掩盖训练图像中的许多方形区域来提高CNN的稳健性。，许多被抹去的区域都是不相关的背景，或者是整个图像都是不相关的。**作者的drop直觉上是选择了图像中有代表性的区域**。
+
+2.别人提出的AutoAugmentation、Adversarial Data Augmentation设计复杂，作者提出的注意力引导的数据增强简单。
+
+**三、针对定位的弱监督学习。作者的优势在于关注的区域更多。**
+
+1.弱监督是一个统称。这里，仅仅通过图像层面的监督来准确定位物体或它的一部分（这个就叫做弱监督）是非常具有挑战性的。早期的工作通常通过全局平均池（GAP）生成特定类别的定位图，激活区可以反映物体的位置。还有其他一些方法，缺点主要是关注的区域太少了。作者提出的注意力引导的数据增强鼓励模型关注多个物体的部分，提取更多的鉴别性特征，并在物体定位方面取得明显的性能。
+
+<u>看到这里，发现作者写文章的层次还是挺清楚的吧。只要抓住别人“做得不好”的地方，就引用+举例（多个例子）然后说明自己的优势。</u>
+
+## Framework
+
+训练过程：对一张image图像，先看蓝色部分，经过cnn进行特征提取，然后由特征图生成attention maps，然后feature maps和attention maps就通过bap可以得到局部特征图（下图中没有体现，结合后文），然后经过池化/卷积提取局部特征，合并成特征矩阵，再经过全连接层得到预测结果p。问题是，x是什么。
+
+通过这张图对应的attention maps，随机抽取一张，作为augmentation map，用这张和原图去进行计算，做crop/drop，分别得到1张图。新得到的两张图就是图中橙色的augmented image，经过刚才一样的操作，可以得到2个结果p。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-05-213.55.35.png)
+
+
+
+测试过程：一张原始图片，cnn提取特征，得到feature maps，再由feature maps得到attention maps，两者计算得到特征矩阵，由这个特征矩阵，经过全连接层得到一个结果p。刚才得到的attention maps抽取一张，用来做object map，然后去定位，crop，resize，新的input，跟刚才一样的操作，得到一个结果p。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-05-213.55.47.png)
+
+## Weakly Supervised Attention Learning
+
+一张原始图像，输入的tensor，应该是比如（224，224，3），先忽略batch大小。然后通过特征提取，得到H，W，N。比如7，7，2048。resnet50为例，参考：https://blog.csdn.net/qq_37025073/article/details/107293384
+
+那么attention maps就是由这个特征图，经过1*1的卷积计算，得到7，7，32大小。问题是怎样去约束32个part，每一个part都表示不一样的区域？
+
+ok，假设现在attention maps已经训练得不错了，它如期望一样可以关注不同part。那么怎样把feature maps和attention maps融合起来，做特征融合？这里作者采用bilinear attention map（启发自bilinear pooling），如下图。每一张attention map都和feature maps做 element-wise multiplying 得到part feature maps，然后做卷积或者池化（全局平均池化/全局最大池化，作者用的GAP全局平均池化）也就是g，提取局部特征记作 fk ，大小为1×N ，然后concat起来得到feature matrix，大小为M×N。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-05-214.15.21.png)
+
+回到上面提出的一个问题。怎样去约束32个part，每一个part都表示不一样的区域？通过1*1卷积，把7，7，2048的通道数量压缩成7，7，32，再做特征融合，再池化一下，应该可以吧。（我猜的）作者在这里更强调：对于一个特定的子类别，要做到，每张图片的第k张attention map都可以表示same kth object’s part. 比如猫这个大类下，猫的特征有很多，耳朵，鼻子，眼睛颜色，尾巴形状。对于猫的所有的子类，应当都有这些特征。所以作者期望，attention maps里面，每张attention map所体现的特征是定好的。比如第16张map就是表示猫的尾巴形状，第18张map就是表示眼睛的颜色。那么至少所有图像的attention maps的第18张，虽然多多少少有些差异，但是应该相差不多，因为是提取的同一个特征。
+
+怎么约束这一点？作者受center loss启发，提出attention regularization loss。
+
+具体来讲，每一个特征都设定一个ck，ck形状同fk，也是1xN。ck就是第k个特征的center，fk都应当像ck靠拢。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-05-214.37.10.png)
+
+ck就是第k个part的feature center。初始化为0。
+
+以上面的bap为例。什么时候可以计算这个attention regularization loss。以一张图片的计算为例，得到attention maps以后，就可以计算。因为这时候ck都为0，所以La是很大的，所以要去做更新。β 控制了 ck 更新的速率。极端一点，β 取1，那ck直接就被更新成了fk。那如果fk代表某个特征的值，那ck就有代表性了。但是实际上 β 肯定不会取1嘛，比如取个0.5，输入的fk的值（是向量，但我简化一下，只取一个最大的值，最有代表性的那个值，比如0，0，1，0，24就取24）依次为99，100，98，93，88。多次迭代以后，ck一定会在各个fk之间拉扯然后达到某个中间的值。（代码里取alfa=0.95，即beta=0.05）
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-05-214.37.13.png)
+
+到这里为止。解决了两个问题。
+
+一个是，怎么提取32个part的特征：对原始特征图进行1*1卷积，然后和特征图做BAP，bilinear attention pooling。得到part features，然后用池化层提取。卷积+双线性池化+全局池化。
+
+另一个是，怎么约束每一个子类别得到的attention maps，的第k个map都表示一个特定的特征：用一个center feature/feature center，对每一次传进来的fk都去做一个迭代。最后c1就应该和大多数的f1类似，c2就应该和大多数的f2类似……ck就应该和大多数的fk类似。
+
+## Attention-guided Data Augmentation
+
+之前提到，随机的数据增强比较低效。所以我们用attention maps来引导数据增强。对于一张图片生成的7，7，32的attention maps，我们取其中一张，7，7，1。然后对它做正则化，如下图。结果记作Augmentation Map。这个正则化是有目的的哈。
+
+![截屏2022-05-21 下午5.01.22](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-21 下午5.01.22.png)
+
+attention crop：设定一个阈值（作者设置0.5），对于刚才正则化得到的Ak*，只要map里面大于阈值的，改成1，否则，改成0（下图）。因为这样子得到的1的范围是不规则的嘛，不方便crop，但是没关系，可以做一个bounding box，它能把所有的1都包含进去（上、下、左、右各取一个边界）。然后去对原图做crop。（这里好像没有说明插值放大是在什么时候）
+
+![截屏2022-05-21 下午5.03.05](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-21 下午5.03.05.png)
+
+attention drop：（阈值设置0.5）一样的操作，1、0互换。这样有一个好处。就是drop得到的图像（作为输入）和之前一样，去提取特征，然后生成attention maps的时候，可以想到这个maps和原图的maps会有很多不同的地方。它关注不一样的特征。
+
+![截屏2022-05-21 下午5.09.18](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-21 下午5.09.18.png)
+
+## Object Localization and Refinement
+
+纠正上文的一个错误哈。我之前以为，测试部分，也是从attention maps随机抽一张来完成后面的计算，但是实际上， Object Map Am是做了一个平均的操作，如下图。然后把它放大，去做bouding box去定位。测试部分，一张图像会有两个结果，一个原始结果，一个refine（更精细）以后的结果，最终结果是这两个取平均。
+
+![截屏2022-05-21 下午5.13.23](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-21 下午5.13.23.png)
+
+<u>到这里为止，作者的想法应该是阐释清楚了，但是具体实现的细节肯定还是没有展示的啦，后面结合代码讲。</u>
+
+## 实验
+
+1.用了四个公共数据集。CUB-200-2011（鸟类）, FGVC-Aircraft（飞机）, Stanford Cars （汽车） and Stanford Dog （狗）
+
+2.We train the models using Stochastic Gradient Descent (SGD) with the momentum of 0.9, 
+
+epoch number of 80, weight decay of 0.00001, and a mini-batch size of 16 on a P100 GPU. 
+
+The initial learning rate is set to 0.001, with exponential decay of 0.9 after every 2 epochs. 
+
+3.作者把他在原backbone上加的东西分为四部分，attention maps和bap；crop；drop；测试时再加上loc&refine。具体提升如下。
+
+![截屏2022-05-21 下午5.30.22](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-05-21 下午5.30.22.png)
+
+4.作者也计算了用attention crop做定位得到的iou和随机crop的iou的值，就是定位这一块的效果量化，略。
+
+5.parts的数量取32就不错。
+
+6.作者也可视化了一些attention crop和attention drop的结果。视觉上确实好看很多。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-05-215.38.13.png)
+
+<u>至此，这篇文章算是完全重新看了一遍，也写下了自己的理解。</u>
+
+<u>然后就是结合代码部分具体来看一下它的实现，方便后续修改，最终目的。</u>
+
+## pytorch实现（仅作为记录）
+
+我选的实现版本：
+
+https://github.com/wvinzh/WS_DAN_PyTorch
+
+attention_maps：
+
+```
+if self.use_bap:
+    # channel数取前32个？
+    attention = out[:, :32, :, :]
+    # attention_maps 如何生成？作者的回答：attention maps 是通过1x1卷积生成，我是直接取得中间的一个1x1卷积层的输出，并不是单独添加的。
+    raw_features, pooling_features = self.bap(feature_map, attention)
+    return attention, raw_features, pooling_features
+```
+
+bap：
+
+Feature_maps: 12,512,28,28
+
+```
+class BAP(nn.Module):
+    def __init__(self, **kwargs):
+        super(BAP, self).__init__()
+
+    def forward(self, feature_maps, attention_maps):
+        feature_shape = feature_maps.size()  ## 12*768*26*26* 这里是按照inception v3写的，如果是resnet50的话，就是12*512*7*7
+        attention_shape = attention_maps.size()  ## 12*num_parts*26*26
+        # print(feature_shape,attention_shape)
+        phi_I = torch.einsum('imjk,injk->imn', (attention_maps, feature_maps))  ## 12*32*768
+        phi_I = torch.div(phi_I, float(attention_shape[2] * attention_shape[3]))  ## div 做除法
+        phi_I = torch.mul(torch.sign(phi_I), torch.sqrt(torch.abs(phi_I) + 1e-12))  ## sign 符号函数，大于0取1，小于0取-1，等于0取0
+        phi_I = phi_I.view(feature_shape[0], -1)
+        raw_features = torch.nn.functional.normalize(phi_I, dim=-1)  ##12*(32*768)
+        pooling_features = raw_features * 100
+        # print(pooling_features.shape)
+        return raw_features, pooling_features
+```
+
+我试图搞清楚，作者在什么位置加了什么东西。打印net
+
+``` (layer4): Sequential(
+  (layer4): Sequential( 
+  	# 输入 14，14，1024
+    (0): Bottleneck(
+      (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    # 输出 7，7，2048 每一个layer的第一个bottleneck都有这个，应该是shortcut，1024->2048同时stirde=2,
+    # 这个downsample会传入bottleneck里面做shortcut运算
+      (downsample): Sequential(
+        (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    # 这里开始 输入 7，7，2048
+    (1): Bottleneck(
+      (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+   	# 到这里为止，输出 7,7,2048
+      (bap): BAP() # 
+    )
+  )
+```
+
+Res50 standard layer4
+
+ ``` (layer4): Sequential(
+    (0): Bottleneck(
+      (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck(
+      (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (2): Bottleneck(
+      (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+ ```
+
+1.知道了代码里面feature maps在哪里被提取出来，attention maps在哪里被提取出来（这里就可以修改）也纠正了之前的一个误区。我以为attention maps是直接在feature maps上改的（现在的代码），实际上是再经过3*3卷积提取，再去取的（attention的获取能不能能改，可以改吧）。也知道feature_len是什么了对吧，是深度。确实是512.
+
+2.这样的基础上我想再看看bap是怎么计算的。代码作者直接简化成，一步计算到matrix，然后展平成p，然后要计算概率的时候用的是l2_norm。（https://blog.csdn.net/qq_22210253/article/details/86545354）它其实不是得到概率分布，因为所有的结果加起来不为1，它的作用就是将一组数的每一个数都转化到0-1之间（用这个去计算center loss）。这个结果返回。另一个pool_features，直接*100，我觉得意义不明啊。但最后是用这个pool的去接全连接层。得到真正的p。作者这个结果，为什么能去作为和output对标的结果啊，迷惑。用这个去计算交叉熵损失。
+
+3.结合论文看一下（主要看代码的实现，因为，可以先改改试试看嘛），center loss是用什么计算的。32个part的特征：f，代码里面是raw_features。形状是([12, 16384])，
+
+c的形状是37，512x32也就是37*16384。这里原代码确实传入的是类别数。尴尬啊。没问题的，后面在函数里会取center[label]，用tensor取tensor。
+
+```
+center_dict = {'center': torch.zeros(
+    37, feature_len * config.parts)}
+```
+
+看一下这个函数calculate_pooling_center_loss。晚上看看能不能改。应该可以吧，batch_features和batch_centers都有了。
+
+4.看一下老师发的那篇的loss。看了，修改了。（解决长尾问题/类别不均衡，对样本数量较少的类别更加友好）是不是还有few-shot的概念？
+
+5.看一下这个attention maps的提取。修改一下。自注意力？
+
+6.调研一下WSDAN大家在往哪个方向改。
+
+## 参考文档
+
+https://blog.csdn.net/qq_27825451/article/details/95888267
