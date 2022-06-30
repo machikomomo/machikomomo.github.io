@@ -177,7 +177,7 @@ if self.use_bap:
 
 bap：
 
-Feature_maps: 12,512,28,28
+Feature_maps: 12,512,7,7
 
 ```
 class BAP(nn.Module):
