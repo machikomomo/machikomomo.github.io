@@ -1,7 +1,7 @@
 ---
 author: "momo"
 date: 2022-09-07
-title: "transformer入门"
+title: "Transformer相关"
 categories: [
     "论文笔记",
 ]
@@ -42,19 +42,13 @@ src是编码器的输入，tgt是解码器的输入。out的形状和tgt的形�
 
 我想要知道的，其实是对于feature_maps和label_emb这两个tensor，中间经过了怎样的黑盒子，以及论文的意思是否对得上。
 
-所以，需要了解nn.Transformer中编码器的结构和解码器的结构。
-
-在原文中，编码器个数为1，解码器个数为2。
-
-
-
-能不能用到我的论文——我认为是可以的。只是我不想这样草率地去做这件事情。
+所以，需要了解nn.Transformer中编码器的结构和解码器的结构。在原文中，编码器个数为1，解码器个数为2。
 
 
 
 ## 尝试参考nn.Transformer源码
 
-了解大意即可。它是按照2017年的Attention is all you need所编写的标准的代码。
+了解大意即可。按照2017年的Attention is all you need所编写的标准的代码。
 
 
 
@@ -76,7 +70,7 @@ print(out.shape)
 '''
 ```
 
-黑盒子，里面对这个src做了哪些处理？注意，虽然这里可以穿入三个参数，src、src_mask、src_key_padding_mask但是实际上我用到的只有src，只传入了src，所以代码其实可以简化。
+黑盒子，里面对这个src做了哪些处理？注意，虽然这里可以穿入三个参数，src、src_mask、src_key_padding_mask但是实际上用到的只有src，只传入了src，所以代码其实可以简化。
 
 ```python
 def forward(self, src: Tensor, src_mask: Optional[Tensor] = None, src_key_padding_mask: Optional[Tensor] = None) -> Tensor:
@@ -124,7 +118,7 @@ torch.Size([12, 49, 49])
 
 输入是上面那个src，连着3个一样的。输出，第一个是真正需要的输出，第二个应该就是权重、重要程度、关注度啥的，anyway，
 
-输入和输出的形状是一样的。三个输入分别是q k v，里面的操作，说实话我不感兴趣了，因为我不会改里面的，所以。在编码层，就是三个一样的src传了进去，对吧？
+输入和输出的形状是一样的。三个输入分别是q k v，里面的操作，说实话不感兴趣了，因为不会改里面的，所以。在编码层，就是三个一样的src传了进去，对吧？
 
 
 
@@ -144,7 +138,7 @@ print(out.shape)
 
 输出的大小和tgt的大小是一致的。
 
-黑盒子？做了什么？
+黑盒子。
 
 ```python
 def forward(self, tgt: Tensor, memory: Tensor, tgt_mask: Optional[Tensor] = None, memory_mask: Optional[Tensor] = None,
@@ -216,4 +210,4 @@ mask和pad在cv领域的transformer里面（query2label里面）是没有用到�
 
 
 
-![截屏2022-09-07 下午12.45.41](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-09-07 下午12.45.41.png)
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-09-141.49.52.png)

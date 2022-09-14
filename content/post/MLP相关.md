@@ -1,13 +1,13 @@
 ---
 author: "momo"
 date: 2022-09-03
-title: "一些基础"
+title: "MLP相关"
 categories: [
     "论文笔记",
 ]
 ---
 
-## mlp
+## MLP
 
 博客：https://zhuanlan.zhihu.com/p/63184325
 
@@ -113,43 +113,3 @@ if __name__ == '__main__':
 博客：https://blog.csdn.net/odssodssey/article/details/124099498
 
 (bs,channels) 大小的img_feature 和 text_feature 融合
-
-
-
-## 我的启发
-
-准备数据：原始数据是：**<u>图片</u>**（16，3，256，256）和**<u>类别标签</u>**
-
-1、根据类别标签，可以获得<u>**区域标签**</u>
-
-2、**<u>辅助信息</u>**，始终是固定的，是一个（（瞳孔、结膜、角膜）300）的tensor
-
-制作数据集：如上四类数据。数据：图片+辅助信息；标签：类别标签+区域标签
-
-前向计算：1.图片经过backbone提取，预测得到区域标签；2.预测得到的区域标签值，与后面的特征提取模块融合，帮助分类，推测得到最终的类别标签。
-
-loss计算：[BCELoss, BCELoss] 两个loss。平均（动态分配）作为最终loss。
-
-## 
-
-![截屏2022-08-23 上午10.19.22](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-08-23 上午10.19.22.png)
-
-
-
-## 网络架构（d）MSFA——多尺度特征融合模块
-
-![截屏2022-08-23 下午12.45.00](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-08-23 下午12.45.00.png)
-
-## byte pair encoding
-
-https://blog.csdn.net/m0_37962192/article/details/117417537
-
-https://anaconda.org/powerai/bpemb
-
-
-
-## result
-
-5个数据集
-
-## ![截屏2022-08-25 下午6.50.35](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-08-25 下午6.50.35.png)

@@ -91,15 +91,19 @@ loss计算：[DiceBCELoss(), nn.CrossEntropyLoss(), nn.CrossEntropyLoss()] 三�
 
 loss计算：[BCELoss, BCELoss] 两个loss。平均（动态分配）作为最终loss。
 
-## 
+##########
 
-![截屏2022-08-23 上午10.19.22](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-08-23 上午10.19.22.png)
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-09-141.53.00.png)
 
 
 
 ## 网络架构（d）MSFA——多尺度特征融合模块
 
-![截屏2022-08-23 下午12.45.00](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-08-23 下午12.45.00.png)
+
+
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-09-141.53.27.png" style="zoom: 33%;" />
+
+
 
 ## byte pair encoding
 
@@ -113,4 +117,6 @@ https://anaconda.org/powerai/bpemb
 
 5个数据集
 
-## ![截屏2022-08-25 下午6.50.35](/Users/momochan/Library/Application Support/typora-user-images/截屏2022-08-25 下午6.50.35.png)
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2022-09-141.55.02.png" style="zoom: 67%;" />
+
+## 

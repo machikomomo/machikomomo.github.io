@@ -1,7 +1,7 @@
 ---
 author: "momo"
 date: 2022-07-19
-title: "odor-5k-0"
+title: "odir-5k"
 categories: [
     "论文笔记",
 ]

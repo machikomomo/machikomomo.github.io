@@ -1,7 +1,7 @@
 ---
 author: "momo"
 date: 2022-09-05
-title: "query2label"
+title: "Query2Label"
 categories: [
     "论文笔记",
 ]
@@ -17,7 +17,7 @@ categories: [
 
 官方代码：https://github.com/SlongLiu/query2labels
 
-其他人的代码（相对官方的更简洁一点，作者表示可以实现差不多的SOTA效果）：https://github.com/curt-tigges/query2label
+其他人的代码（相对官方的更简洁一点，可能可以实现差不多的SOTA效果）：https://github.com/curt-tigges/query2label
 
 数据集：MS-COCO
 
@@ -29,7 +29,7 @@ categories: [
 
 自然图像数据集，可以用来做多标签分类和其他任务，比较大，本地下载也没什么意义。
 
-主要看一下数据集（需要输入的）是怎么做的吧。
+主要看一下数据集（需要输入的）是怎么做的。
 
 
 
@@ -49,7 +49,7 @@ coco = COCODataModule(
 param_dict["data"] = coco
 ```
 
-主要是看一下这个DataModule返回的是什么。一般来讲就是返回image和label。这里是可以通过调用函数，返回DataLoader。可以做。
+主要是看一下这个DataModule返回的是什么。一般来讲就是返回image和label。这里是可以通过调用函数，返回DataLoader。
 
 
 
@@ -107,7 +107,7 @@ trainer = pl.Trainer(
     callbacks=[TQDMProgressBar(refresh_rate=10)])
 
 trainer.fit(pl_model, param_dict["data"])
-这写法也真的太奇怪了……主要还是用了太多pytorch_lightning的东西
+这写法也真的太奇怪了……主要还是用了pytorch_lightning的东西
 ```
 
 
