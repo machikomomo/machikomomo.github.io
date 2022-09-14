@@ -127,3 +127,5 @@ https://github.com/sthalles/SimCLR
 
 https://github.com/Spijkervet/SimCLR
 
+https://github.com/Spijkervet/SimCLR （源代码在这里，修改的版本在本地，主要就是改一下超参数，可以在本机上运行起来）
+
