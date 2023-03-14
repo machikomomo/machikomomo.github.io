@@ -1,33 +1,35 @@
-name: GitHub Pages
+name: github pages
 
 on:
-  push:
-    branches:
-      - source  # Set a branch to deploy
-  pull_request:
+push:
+branches:
+- source
 
 jobs:
-  deploy:
-    runs-on: ubuntu-20.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+build-deploy:
+runs-on: ubuntu-18.04
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          # extended: true
+steps:
+- uses: actions/checkout@master
+- name: Checkout submodules
+shell: bash
+run: |
+auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+git submodule sync --recursive
+git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
 
-      - name: Build
-        run: hugo --minify
+- name: Setup Hugo
+uses: peaceiris/actions-hugo@v2
+with:
+hugo-version: 'latest'
+extended: true
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_branch: main
+- name: Build
+run: hugo --gc --minify --cleanDestinationDir
+
+- name: Deploy
+uses: peaceiris/actions-gh-pages@v3
+with:
+deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+publish_dir: ./public
+publish_branch: master
