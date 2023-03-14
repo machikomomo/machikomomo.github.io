@@ -13,7 +13,7 @@ steps:
 - uses: actions/checkout@master
 - name: Checkout submodules
 shell: bash
-run: 
+run: |
 auth_header="$(git config --local --get http.https://github.com/.extraheader)"
 git submodule sync --recursive
 git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
@@ -32,4 +32,4 @@ uses: peaceiris/actions-gh-pages@v3
 with:
 deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
 publish_dir: ./public
-publish_branch: master
+publish_branch: main
