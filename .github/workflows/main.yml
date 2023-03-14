@@ -1,35 +1,32 @@
 name: github pages
 
 on:
-push:
-branches:
-- source
+  push:
+    branches:
+      - master  # 每次推送到 main 分支都会触发部署任务
 
 jobs:
-build-deploy:
-runs-on: ubuntu-18.04
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-steps:
-- uses: actions/checkout@master
-- name: Checkout submodules
-shell: bash
-run: |
-auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-git submodule sync --recursive
-git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.79.1'
+          extended: true
 
-- name: Setup Hugo
-uses: peaceiris/actions-hugo@v2
-with:
-hugo-version: 'latest'
-extended: true
+      - name: Build
+        run: hugo --minify
 
-- name: Build
-run: hugo --gc --minify --cleanDestinationDir
-
-- name: Deploy
-uses: peaceiris/actions-gh-pages@v3
-with:
-deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-publish_dir: ./public
-publish_branch: main
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          external_repository: machikomomo.github.io  # 替换成上文所创建的个人主页仓库
+          publish_branch: main
+          publish_dir: ./public
