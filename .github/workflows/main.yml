@@ -3,7 +3,7 @@ name: github pages
 on:
   push:
     branches:
-      - master  # 每次推送到 main 分支都会触发部署任务
+      - main  # 每次推送到 main 分支都会触发部署任务
 
 jobs:
   deploy:
