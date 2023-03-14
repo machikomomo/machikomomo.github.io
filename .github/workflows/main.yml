@@ -30,3 +30,4 @@ jobs:
           external_repository: machikomomo.github.io  # 替换成上文所创建的个人主页仓库
           publish_branch: main
           publish_dir: ./public
+          
