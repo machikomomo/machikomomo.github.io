@@ -9,7 +9,7 @@ categories: [
 
 ---
 
-<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.06.07.png" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.06.07.png"  />
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E9%9B%AA%E5%A4%A92.jpeg)
 
