@@ -142,10 +142,10 @@ seed可以去生成不同的风格。但是话说回来，如果AI render intens
 
 4.怎么说，感觉非常适合用来量产一些人设/改头像什么的。
 
-![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%8811.07.31.png)
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-1811.18.04.png)
 
 
 
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-1811.18.22.png)
 
-
-![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%8811.18.04.png)
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-1811.07.31.png)
