@@ -8,13 +8,13 @@ categories: [
 
 ---
 
-<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%886.06.07.png" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.06.07.png" style="zoom:50%;" />
 
-<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%886.08.56.png" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.08.56.png" style="zoom:50%;" />
 
-<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%886.13.05.png" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.13.05.png" style="zoom:50%;" />
 
-<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%886.15.15.png" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.15.15.png" style="zoom:50%;" />
 
 
 
@@ -31,7 +31,7 @@ https://www.artbreeder.com/
 - 主界面：对图片去进行一些操作，比如裁剪、拖拽等。
 - 右侧工具栏：快速选定元素。调整面板的比例（放大、缩小）。
 
-![截屏2023-03-18 下午6.36.03](/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.36.03.png)
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.36.03.png" style="zoom:50%;" />
 
 3.实现效果：拉啊、太拉了……（一定是我使用的方式不对……）这是我在它的示范样例基础上略加修改的prompt。
 
@@ -39,65 +39,65 @@ https://www.artbreeder.com/
 
 它生成的效果一览（支持多次生成）：
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.47.01.png" alt="截屏2023-03-18 下午6.47.01" style="zoom: 50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.44.49.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.44.49.png" alt="截屏2023-03-18 下午6.44.49" style="zoom: 50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.45.13.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.47.57.png" alt="截屏2023-03-18 下午6.47.57" style="zoom: 50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.47.01.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.45.13.png" alt="截屏2023-03-18 下午6.45.13" style="zoom: 50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.47.57.png" style="zoom:50%;" />
 
 
 
 4.啊啊啊不懂啊，我的猫耳呢，我的猫耳元素怎么被忽略掉了。想到第二句promt可能写得不好，所以决定删除。目标是生成一个有猫耳的机器人。
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.52.24.png" alt="截屏2023-03-18 下午6.52.24" style="zoom: 50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.52.24.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.53.45.png" alt="截屏2023-03-18 下午6.53.45" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.53.45.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.54.25.png" alt="截屏2023-03-18 下午6.54.25" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.54.25.png" style="zoom:50%;" />
 
 5.好像有点像样了，但是和我想的差太远了……来调整一下参数。看看参数不同的影响。
 
 控制其他参数不变，调整 AI render intensity（这个没有具体的参数值，就拖着进度条大概取了0、1/4、1/2、3/4、1）
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午6.57.01.png" alt="截屏2023-03-18 下午6.57.01" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.57.01.png" style="zoom:50%;" />
 
 6.下面是AI render intensity分别取0、1/4、1/2对应的结果。
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.01.06.png" alt="截屏2023-03-18 下午7.01.06" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.00.49.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.02.50.png" alt="截屏2023-03-18 下午7.02.50" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.02.50.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.03.17.png" alt="截屏2023-03-18 下午7.03.17" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.03.17.png" style="zoom:50%;" />
 
 7.AI render intensity取到3/4的时候，有点符合（我）心里的预期了。总体上就是卡通风格。于是多取了几次，reroll的过程其实就是去修改另一个参数（seed）的过程。所以这个reroll其实是一种假随机吧，通过修改seed来生成不同的图。但是只要参数不变的话，生成的图像是不会发生改变的。
 
 以下是AI render intensity取3/4不变，reroll增大分别得到的图片。感觉也没有什么规律，直白地讲可能是不同的画风？
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.04.17.png" alt="截屏2023-03-18 下午7.04.17" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.04.17.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.05.11.png" alt="截屏2023-03-18 下午7.05.11" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.05.11.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.04.56.png" alt="截屏2023-03-18 下午7.04.56" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.04.56.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.12.11.png" alt="截屏2023-03-18 下午7.12.11" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.12.11.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.14.07.png" alt="截屏2023-03-18 下午7.14.07" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.14.07.png" style="zoom:50%;" />
 
 8.最后是AI render intensity取到1，seed取10、20、40、60、80、99得到的图像，嗯，不乏一些比较抽象的……
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.15.42.png" alt="截屏2023-03-18 下午7.15.42" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.15.42.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.16.28.png" alt="截屏2023-03-18 下午7.16.28" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.16.28.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.17.12.png" alt="截屏2023-03-18 下午7.17.12" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.17.12.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.18.14.png" alt="截屏2023-03-18 下午7.18.14" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.18.14.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.18.50.png" alt="截屏2023-03-18 下午7.18.50" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.18.50.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.19.12.png" alt="截屏2023-03-18 下午7.19.12" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.19.12.png" style="zoom:50%;" />
 
 9.总的来讲，AI render intensity越高，生成的图像的自由度越高，应该是模型会使用自己的素材库，去替换掉原面板里的图像。
 
@@ -105,23 +105,23 @@ seed可以去生成不同的风格。但是话说回来，如果AI render intens
 
 
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.23.09.png" alt="截屏2023-03-18 下午7.23.09" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.23.09.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.24.08.png" alt="截屏2023-03-18 下午7.24.08" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.24.08.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.24.34.png" alt="截屏2023-03-18 下午7.24.34" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.24.34.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.25.38.png" alt="截屏2023-03-18 下午7.25.38" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.25.38.png" style="zoom:50%;" />
 
 但是在AI render intensity取到3/4时，调整seed从20、40、60、80，风格的差异就能体现。话说为啥我觉得seed是风格呢，因为有时候甚至能在图片右下角看到一些可能是原有创作者的签名……
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.26.22.png" alt="截屏2023-03-18 下午7.26.22" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.26.22.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.27.18.png" alt="截屏2023-03-18 下午7.27.18" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.27.18.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.27.37.png" alt="截屏2023-03-18 下午7.27.37" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.27.37.png" style="zoom:50%;" />
 
-<img src="/Users/momochan/Library/Application Support/typora-user-images/截屏2023-03-18 下午7.28.15.png" alt="截屏2023-03-18 下午7.28.15" style="zoom:50%;" />
+<img src="https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.28.15.png" style="zoom:50%;" />
 
 10.总体上，上手不是很难呢，但是要去调整参数、寻找素材，最后得到一个符合自己心理预期的图片，还是需要花时间的呢。所以如果有人能提供一些训练的技巧（可以这么说吧），比如说某种风格的参数是多少左右比较合适，那应该会减少这个训练的成本。虽然也可以很粗暴地比如说提供一些标签词（xx风）去限定生成的图片的风格，那样应该更方便，不过目前这种方式自由度应该也更高一点吧！
 
