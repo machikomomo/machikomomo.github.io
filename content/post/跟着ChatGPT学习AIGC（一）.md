@@ -4,6 +4,7 @@ date: 2023-03-18
 title: "跟着ChatGPT学习AIGC（一）"
 categories: [
     "AIGC",
+    "ChatGPT"
 ]
 
 ---
