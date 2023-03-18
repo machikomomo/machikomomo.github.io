@@ -9,7 +9,7 @@ categories: [
 
 ---
 
-# 让ChatGPT来写大纲
+## 让ChatGPT来写大纲
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.06.07.png)
 
@@ -21,15 +21,15 @@ categories: [
 
 
 
-# ArtBreeder
+## ArtBreeder
 
 https://www.artbreeder.com/
 
 官网的界面/UI设计非常有特色……
 
-目前上线了3个功能，分别是collager、splicer、outpainter。
+目前上线了3个功能，分别是Collager、Splicer、Outpainter。
 
-## collager
+### Collager
 
 1.可以自己上传图片进行裁剪、拼接，输入提示词，然后用AI模型根据提示词对已有的图片素材进行渲染。
 
@@ -132,7 +132,7 @@ seed可以去生成不同的风格。但是话说回来，如果AI render intens
 
 12.下一步应该是找一些相关的教程，怎样去更好地用它训练出指定风格的图片，调整参数的技巧是什么。
 
-## splicer
+## Splicer
 
 1.可以选择示例图，然后调整参数获得定制化的图片……be like，得到了下面的头像……有些参数就挺糊弄的比如色调RGB，但是有些比如长发、微笑就还做得蛮自然的。
 
