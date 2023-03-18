@@ -9,6 +9,8 @@ categories: [
 
 ---
 
+# 让ChatGPT来写大纲
+
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.06.07.png)
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.08.56.png)
@@ -19,11 +21,17 @@ categories: [
 
 
 
-## ArtBreeder
+# ArtBreeder
 
 https://www.artbreeder.com/
 
-1.官网的界面/UI设计非常有特色啊……
+官网的界面/UI设计非常有特色……
+
+目前上线了3个功能，分别是collager、splicer、outpainter。
+
+## collager
+
+1.可以自己上传图片进行裁剪、拼接，输入提示词，然后用AI模型根据提示词对已有的图片素材进行渲染。
 
 2.可操作性：非常简单，5-10min可以上手，唯一的难点在于有看不懂的英文，扔进deepl进行翻译。
 
@@ -84,7 +92,7 @@ https://www.artbreeder.com/
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.14.07.png)
 
-8.最后是AI render intensity取到1，seed取10、20、40、60、80、99得到的图像，嗯，不乏一些比较抽象的……
+8.最后是AI render intensity取到1，seed取10、20、40、60、80、99得到的图像，嗯，出现了一些奇奇怪怪的抽象的……
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.15.42.png)
 
@@ -102,8 +110,6 @@ https://www.artbreeder.com/
 
 seed可以去生成不同的风格。但是话说回来，如果AI render intensity取值不高也就是说原面板里的图像保留较多的时候，seed可以发挥的空间是不多的。如下，AI render intensity取值0，调整seed为20、40、60、80，并没有什么明显差别，因为风格无法在既定的素材里得到展示。
 
-
-
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.23.09.png)
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.24.08.png)
@@ -112,7 +118,7 @@ seed可以去生成不同的风格。但是话说回来，如果AI render intens
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.25.38.png)
 
-但是在AI render intensity取到3/4时，调整seed从20、40、60、80，风格的差异就能体现。话说为啥我觉得seed是风格呢，因为有时候甚至能在图片右下角看到一些可能是原有创作者的签名……
+10.但是在AI render intensity取到3/4时，调整seed从20、40、60、80，风格的差异就能体现。话说为啥我觉得seed是风格呢，因为有时候甚至能在图片右下角看到一些可能是原创作者的签名……
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.26.22.png)
 
@@ -122,6 +128,24 @@ seed可以去生成不同的风格。但是话说回来，如果AI render intens
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-187.28.15.png)
 
-10.总体上，上手不是很难呢，但是要去调整参数、寻找素材，最后得到一个符合自己心理预期的图片，还是需要花时间的呢。所以如果有人能提供一些训练的技巧（可以这么说吧），比如说某种风格的参数是多少左右比较合适，那应该会减少这个训练的成本。虽然也可以很粗暴地比如说提供一些标签词（xx风）去限定生成的图片的风格，那样应该更方便，不过目前这种方式自由度应该也更高一点吧！
+11.总体上，上手不是很难呢，但是要去调整参数、寻找素材，最后得到一个符合自己心理预期的图片，还是需要花时间的呢。所以如果有人能提供一些训练的技巧（可以这么说吧），比如说某种风格的参数是多少左右比较合适，那应该会减少这个训练的成本。虽然也可以很粗暴地比如说提供一些标签词（xx风）去限定生成的图片的风格，那样应该更方便，不过目前这种方式自由度应该也更高一点吧！
 
-11.下一步应该是找一些相关的教程，怎样去更好地用它训练出指定风格的图片，调整参数的技巧是什么。
+12.下一步应该是找一些相关的教程，怎样去更好地用它训练出指定风格的图片，调整参数的技巧是什么。
+
+## splicer
+
+1.可以选择示例图，然后调整参数获得定制化的图片……be like，得到了下面的头像……有些参数就挺糊弄的比如色调RGB，但是有些比如长发、微笑就还做得蛮自然的。
+
+2.推理速度……有点慢，不过也能等，但是有点慢，这么个状态。
+
+3.下面三组图的初始图都是相同的。
+
+4.怎么说，感觉非常适合用来量产一些人设/改头像什么的。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%8811.07.31.png)
+
+
+
+
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/%E6%88%AA%E5%B1%8F2023-03-18%20%E4%B8%8B%E5%8D%8811.18.04.png)
