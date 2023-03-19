@@ -27,7 +27,7 @@ https://www.artbreeder.com/
 
 官网的界面/UI设计非常有特色……
 
-目前上线了3个功能，分别是Collager、Splicer、Outpainter。
+目前上线了3个功能，分别是Collager、Splicer、Outpainter（最后一个貌似要充钱）。
 
 ### Collager
 
@@ -149,3 +149,32 @@ seed可以去生成不同的风格。但是话说回来，如果AI render intens
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-1811.18.22.png)
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-1811.07.31.png)
+
+5.其他比如建筑、风景、角色等。
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-1811.36.45.png)
+
+
+
+## Stable Diffusion
+
+教程参考：https://op7418.zhubai.love/posts/2239983151969951744
+
+部署在colab上。
+
+lora：https://civitai.com/
+
+塔罗牌：https://civitai.com/models/11177/anime-tarot-card-art-style-lora
+
+a4.5+orange_vae
+
+masterpiece, best quality, 2girls, long_hair, looking_at_each_other, 1white hair,1 black hair, 1blue eyes, 1 green eyes, smile, sunshine, bangs, skirt, shirt, short_sleeves,  dress, bow, opened_mouth, flower, candy, frills, dress_flower, petals, bouquet,  center_frills, bonnet, cloud((black_background)), <lora:animeTarotCardArtStyleLora_v20Offset:0.9> <lora:Moxin_10:0.8> <lora:Flowergirl_v1:0.6>
+
+fat, naked, nude, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2),((monochrome)), ((grayscale)), bad anatomy, DeepNegative, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, bad feet, cropped, poorly drawn hands, poorly drawn face, mutation, deformed, extra fingers, extra limbs, extra arms, extra legs, malformed limbs, fused fingers, too many fingers, long neck, cross-eyed, mutated hands, polar, bad body, bad proportions, gross proportions, text, error, missing fingers, missing arms, missing legs,
+
+![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/00000-3539458803.png)
+
+
+
+
+
