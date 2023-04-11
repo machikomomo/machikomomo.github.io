@@ -1,9 +1,8 @@
 ---
 author: "momo"
-date: 2023-04-11
-title: "数据分析"
+title: "Data Analysis of Fliggy Travel Platform"
 categories: [
-    "笔记",
+    "DA",
 ]
 
 ---
