@@ -1,8 +1,9 @@
 ---
-author: "momo"
+author: "Moka"
 title: "Data Analysis of Fliggy Travel Platform"
+date: 2023-03-15
 categories: [
-    "DA",
+    "Data Analysis",
 ]
 
 ---
