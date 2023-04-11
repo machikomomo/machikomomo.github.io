@@ -1,7 +1,7 @@
 ---
 author: "momo"
 date: 2023-03-18
-title: "跟着ChatGPT学习AIGC（一）"
+title: "跟着ChatGPT学习AIGC（二）"
 categories: [
     "AIGC",
     "ChatGPT"
@@ -9,7 +9,7 @@ categories: [
 
 ---
 
-## 让ChatGPT来写大纲
+## 让ChatGPT来写大纲吧
 
 ![](https://halfbit.oss-cn-hangzhou.aliyuncs.com/2023-03-186.06.07.png)
 
